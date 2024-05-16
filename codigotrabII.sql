@@ -8,7 +8,10 @@ SELECT * FROM Formandos
 SELECT * FROM Formadores
 SELECT * FROM ManuaisEscolares
 SELECT * FROM Produzir
+SELECT * FROM Vender
 
+SELECT * FROM tipo_fabricacao
+SELECT * FROM Classificar
 --Inserçao de dados na tabela endereço
 INSERT INTO Endereco (End_CodigoPostal, End_Localidade)
 VALUES ('5000-000', 'Vila Real')
@@ -93,4 +96,88 @@ INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidad
 VALUES('22 March 2023', 3129798457239, 15, 29.99, 150)
 
 
---Inserção de dados na tabela Produzir
+--Inserção de dados na tabela Paises
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(1, 'Espanha', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(2, 'Portugal', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(3, 'França', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(4, 'Suiça', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(5, 'Alemanha', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(6, 'Belgica', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(7, 'Brasil', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(8, 'Inglaterra', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(9, 'Finlândia', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(10, 'Suécia', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(11, 'China', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(12, 'Coreia Norte', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(13, 'Russia', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(14, 'Argentina', 1)
+
+--Inserção de dados na tabela Vender
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (1,31, 0942893061047, '2023-05-10', 10, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (8,31, 0942893061047, '2023-05-11', 10, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (3,31, 0942893061047, '2023-05-10', 30, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (2,31, 0942893061047, '2023-05-10', 30, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (5,31, 0942893061047, '2023-06-25', 10, 37.99) 
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (2,31, 3491270634913, '2023-06-20', 25, 39.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (10,86, 4239590252892, '2023-06-30', 49, 31.79) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (10,15, 0942893058025, '2023-08-1', 20, 33.49) --
+
+--Inserção de dados na tabela Viver
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (14111111149, 2, '4 March 2004')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio, Data_Fim)
+VALUES (34850311149, 10, '8 October 2004', '3 April 2015')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (34850311149, 2, '4 April 2015')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (90097140172, 2, '14 January 2004')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (14412315809, 2, '28 February 2004')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (65894290193, 2, '10 February 2004')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (43894120385, 2, '25 May 2004')
+
+--Inserção de dados na tabela tipo_fabricacao
+INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao)
+VALUES(15, 'Fabricação em lote')
+INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao, Descricao)
+VALUES(2, 'Fabricação por encomenda', 'Exclusivo Clientes especiais')
+INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao)
+VALUES(10, 'Fabricação flexível')
+
+--Inserção de dados na tabela Classificar
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893061047, 43894120385, 15)
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893061047, 14412315809, 15)
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893061047, 90097140172, 15)
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893058025, 65894290193, 2)
+
+
+
+
