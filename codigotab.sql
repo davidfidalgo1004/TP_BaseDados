@@ -187,4 +187,3 @@ CREATE TABLE Produzir(
     FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares,
     FOREIGN KEY (ID_Editoras) REFERENCES Editoras,
 )
-
