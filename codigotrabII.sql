@@ -8,10 +8,15 @@ SELECT * FROM Formandos
 SELECT * FROM Formadores
 SELECT * FROM ManuaisEscolares
 SELECT * FROM Produzir
+SELECT * FROM Viver
 SELECT * FROM Vender
-
+SELECT * FROM Erratas
+SELECT * FROM ManuaisEscolares_Erratas
+SELECT * FROM Formacao
+SELECT * FROM Editoras
 SELECT * FROM tipo_fabricacao
 SELECT * FROM Classificar
+SELECT * FROM Paises
 --Inserçao de dados na tabela endereço
 INSERT INTO Endereco (End_CodigoPostal, End_Localidade)
 VALUES ('5000-000', 'Vila Real')
@@ -177,6 +182,30 @@ INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
 VALUES(0942893061047, 90097140172, 15)
 INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
 VALUES(0942893058025, 65894290193, 2)
+
+--Inserção de dados na tabela Erratas
+INSERT INTO Erratas(ID_Erratas, Texto)
+VALUES(1, 'Pergunta 5 da pagina 59')
+INSERT INTO Erratas(ID_Erratas, Texto)
+VALUES(2, 'Exclusão da pergunta 10 da pagina 15')
+INSERT INTO Erratas(ID_Erratas, Texto)
+VALUES(3, 'Erros Ortográficos')
+
+--Inserção de dados na tabela ManuaisEscolares_Erratas
+INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
+VALUES(0942893061047, 1)
+INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
+VALUES(0942893061047, 2)
+INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
+VALUES(3491270634913, 3)
+
+--Inserção de dados na tabela Formacao
+INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
+VALUES('12 May 2024', 3491270634913, 14111111149, 43894120385, 100.60)
+INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
+VALUES('15 May 2024', 3491270634913, 14111111149, 43894120385, 100.60)
+INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
+VALUES('13 May 2024', 9014809183184, 65894290193, 14412315809, 100.90)
 
 
 
