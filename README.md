@@ -1,6 +1,7 @@
 # TP_BaseDados
 Trabalho Prático da UC de Base de Dados 2023/2024
 
+NOTA: NÃO USEM O CÓDIGO QUE FOI POSTO NO DIA 17--------ASS:LEONOR
 
 Informação (2024-05-17)
 Foram encontrados erros no codigo da primeira etapa do trabalho.
@@ -11,3 +12,5 @@ Estarei ao vosso dispor para qualquer dúvida!
 
 Sem mais de momento!
 David Fidalgo
+
+
