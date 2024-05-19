@@ -12,7 +12,7 @@ CREATE TABLE Endereco(
 		End_CodigoPostal CHAR(8) NOT NULL,
 		End_Localidade VARCHAR(50) NOT NULL,
 		CHECK (End_codigoPostal LIKE '[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]'), --Um codigo postal é do genero, por exemplo, 3124-142
-		PRIMARY KEY(End_CodigoPostal)
+		PRIMARY KEY(End_CodigoPostal),
 )
 --CRIAÇÃO DA TABELA PESSOAS
 CREATE TABLE Pessoas(
@@ -33,7 +33,7 @@ CREATE TABLE Pessoas(
 CREATE TABLE tipo_fabricacao(
 		ID_fabricacao  INTEGER NOT NULL,
 		Nome_Fabricacao VARCHAR(50) NOT NULL,
-		Descricao VARCHAR(50) NOT NULL,
+		Descricao VARCHAR(50),
 		CHECK(ID_fabricacao>0),	--Um determinado ID é sempre maior que zero
 		PRIMARY KEY (ID_fabricacao) 
 )
@@ -41,8 +41,8 @@ CREATE TABLE tipo_fabricacao(
 --CRIACAO DA TABELA PAISES
 CREATE TABLE Paises(
 	ID_Paises INTEGER NOT NULL,
-	Nome_Paises VARCHAR(50),
-	Criador BIT NOT NULL DEFAULT 0,
+	Nome_Paises VARCHAR(50)	NOT NULL,
+	Criador BIT NOT NULL DEFAULT 0 NOT NULL,
 	---- Criador pode ser: Criador('1') ou não criador('0')
 	CHECK(ID_Paises>0),
 	PRIMARY KEY (ID_Paises)
@@ -52,7 +52,7 @@ CREATE TABLE Paises(
 CREATE TABLE Viver(
 	  CC BIGINT NOT NULL,
 	  ID_Paises INTEGER NOT NULL,
-	  Data_Inicio DATE,
+	  Data_Inicio DATE NOT NULL,
 	  Data_Fim DATE,
 	  CHECK(CC>0),
 	  CHECK(ID_Paises>0),
@@ -114,7 +114,7 @@ CREATE TABLE Editoras (
     ID_Editoras			INT			NOT NULL,
     Nome_Editoras		VARCHAR(255) NOT NULL,
     Cidade				VARCHAR(255)	NOT NULL,
-    Total_Vendas		DECIMAL(10, 2)	NOT NULL,
+    Total_Vendas		DECIMAL(10, 2),
 	CHECK(ID_Editoras>0),
 	CHECK(Total_Vendas>0),
 	PRIMARY KEY(ID_Editoras),
@@ -124,7 +124,8 @@ CREATE TABLE Editoras (
 CREATE TABLE Vender(
     ID_Paises            Integer            NOT NULL    IDENTITY(1,1), 
     ID_Editoras            Integer            NOT NULL,
-    Data_Vendas					DATE,
+    Data_Vendas					DATE not null,
+	ISBN			BIGINT NOT NULL,
     Quantidade            Integer     NOT NULL ,
     Preco_Unitario        FLOAT  NOT NULL,
 	CHECK(ID_Editoras>0),
@@ -133,42 +134,45 @@ CREATE TABLE Vender(
     PRIMARY KEY(ID_Paises,ID_Editoras),
     FOREIGN KEY(ID_Paises) REFERENCES Paises,
     FOREIGN KEY(ID_Editoras) REFERENCES Editoras,
+	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
 )
 
 --CRIACAO DA TABELA FORMANDOS
 CREATE TABLE Formandos(
-    CC              BIGINT            NOT NULL,
+    CC_Formandos              BIGINT            NOT NULL,
     formacao        VARCHAR(50)        NOT NULL,
     idade            Integer            NOT NULL,
     CHECK(idade>0),
-	CHECK(CC>0),
+	CHECK(CC_Formandos>0),
     PRIMARY KEY(CC),
-    FOREIGN KEY(CC) REFERENCES Pessoas,
+    FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
 )
 
 --CRIACAO DA TABELA FORMADORES
 CREATE TABLE Formadores (
 
-	CC BIGINT       NOT NULL,
+	CC_Formadores BIGINT       NOT NULL,
     Nivel INTEGER	NOT NULL,
-	CHECK(CC>0),
+	CHECK(CC_Formadores>0),
 	CHECK(Nivel>0),
-	PRIMARY KEY(CC) ,
-	FOREIGN KEY (CC) REFERENCES Pessoas,
+	PRIMARY KEY(CC_Formadores) ,
+	FOREIGN KEY (CC_Formadores) REFERENCES Pessoas,
 )
 
 --CRIACAO DA TABELA FORMACAO
 CREATE TABLE Formacao(
     Data_formacao        DATE,
     ISBN                BIGINT        NOT NULL,
-    CC                   BIGINT       NOT NULL,
+    CC_Formadores                   BIGINT       NOT NULL,
+	CC_Formandos		BIGINT NOT NULL,
     preco                FLOAT        NOT NULL,
     CHECK(preco>0),
-	CHECK(CC>0),
+	
 	CHECK(ISBN>0),
     PRIMARY KEY(ISBN, CC, Data_formacao),
     FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
-    FOREIGN KEY(CC) REFERENCES Pessoas,
+    FOREIGN KEY(CC_Formadores) REFERENCES Pessoas,
+	FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
 )
 
 --CRIACAO DA TABELA PRODUZIR
@@ -186,3 +190,5 @@ CREATE TABLE Produzir(
     FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares,
     FOREIGN KEY (ID_Editoras) REFERENCES Editoras,
 )
+
+
