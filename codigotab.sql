@@ -1,188 +1,208 @@
-USE MASTER
-GO
-
-CREATE DATABASE Pessoas
-GO
-
 USE Pessoas
 GO
 
+--Mostrar Tabelas
+SELECT * FROM Pessoas
+SELECT * FROM Endereco
+SELECT * FROM Formandos
+SELECT * FROM Formadores
+SELECT * FROM ManuaisEscolares
+SELECT * FROM Produzir
+SELECT * FROM Viver
+SELECT * FROM Vender
+SELECT * FROM Erratas
+SELECT * FROM ManuaisEscolares_Erratas
+SELECT * FROM Formacao
+SELECT * FROM Editoras
+SELECT * FROM tipo_fabricacao
+SELECT * FROM Classificar
+SELECT * FROM Paises
+--Inserçao de dados na tabela endereço
+INSERT INTO Endereco (End_CodigoPostal, End_Localidade)
+VALUES ('5000-000', 'Vila Real')
+INSERT INTO Endereco (End_CodigoPostal, End_Localidade)
+VALUES ('4520-000', 'Santa Maria da Feira')
+INSERT INTO Endereco (End_CodigoPostal, End_Localidade)
+VALUES ('3700-000', 'SJ Madeira')
 
-CREATE TABLE Endereco(
-		End_CodigoPostal CHAR(8) NOT NULL,
-		End_Localidade VARCHAR(50) NOT NULL,
-		CHECK (End_codigoPostal LIKE '[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]'), --Um codigo postal é do genero, por exemplo, 3124-142
-		PRIMARY KEY(End_CodigoPostal),
-)
---CRIAÇÃO DA TABELA PESSOAS
-CREATE TABLE Pessoas(
-		CC BIGINT NOT NULL,
-		Nome_Pessoas VARCHAR (50) NOT NULL,
-		Data_Nasc DATE,
-		Telefone VARCHAR(9) NOT NULL,
-		End_CodigoPostal CHAR(8) NOT NULL,
-		End_Morada VARCHAR(50) NOT NULL,
-		CHECK(CC>0),	--O numero de CC é sempre maior que zero
-		CHECK (End_codigoPostal LIKE '[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]'),
-		PRIMARY KEY (CC),
-		FOREIGN KEY (End_CodigoPostal) REFERENCES Endereco
-		)
 
-CREATE TABLE Paises(
-	ID_Paises INTEGER NOT NULL,
-	Nome_Paises VARCHAR(50)	NOT NULL,
-	Criador BIT NOT NULL DEFAULT 0 ,
-	---- Criador pode ser: Criador('1') ou não criador('0')
-	CHECK(ID_Paises>0),
-	PRIMARY KEY (ID_Paises)
-)--CRIACAO DA TABELA TIPO_FABRICACAO
+--Inserção de dados na tabela Pessoas
+INSERT INTO Pessoas (CC, Nome_Pessoas, Data_Nasc, Telefone, End_CodigoPostal, End_Morada)
+VALUES (14111111149, 'Leonor Pinto',  '04 March 2004', 910000000,  '5000-000', 'Rua das 4 casas')-- FORMADORA
+INSERT INTO Pessoas (CC, Nome_Pessoas, Data_Nasc, Telefone, End_CodigoPostal, End_Morada)
+VALUES (34850311149, 'Maria Andrade',  '08 October 2004', 920000000,  '4520-000', 'Rua das 5 casas') --FORMADORA
+INSERT INTO Pessoas (CC, Nome_Pessoas, Data_Nasc, Telefone, End_CodigoPostal, End_Morada)
+VALUES (90097140172, 'Raquel Tavares',  '14 January 2004', 933333333,  '3700-000', 'Rua das flores') --FORMANDO
+INSERT INTO Pessoas (CC, Nome_Pessoas, Data_Nasc, Telefone, End_CodigoPostal, End_Morada)
+VALUES (14412315809, 'Matilde Coelho',  '28 February 2004', 944444444,  '5000-000', 'Avenida Liberdade') --FORMANDO
+INSERT INTO Pessoas (CC, Nome_Pessoas, Data_Nasc, Telefone, End_CodigoPostal, End_Morada)
+VALUES (65894290193, 'David Fidalgo',  '10 February 2004', 966666666,  '3700-000', 'Avenida Dr Renato Araujo') --FORMADOR
+INSERT INTO Pessoas (CC, Nome_Pessoas, Data_Nasc, Telefone, End_CodigoPostal, End_Morada)
+VALUES (43894120385, 'Lara Esteves',  '25 May 2004', 988888888,  '5000-000', 'Rua das Rosas') --FORMANDO
 
-CREATE TABLE tipo_fabricacao(
-		ID_fabricacao  INTEGER NOT NULL,
-		Nome_Fabricacao VARCHAR(50) NOT NULL,
-		Descricao VARCHAR(50),
-		CHECK(ID_fabricacao>0),	--Um determinado ID é sempre maior que zero
-		PRIMARY KEY (ID_fabricacao) 
-)
---CRIACAO DA TABELA VIVER
-CREATE TABLE Viver(
-	  CC BIGINT NOT NULL,
-	  ID_Paises INTEGER NOT NULL,
-	  Data_Inicio DATE NOT NULL,
-	  Data_Fim DATE,
-	  CHECK(CC>0),
-	  CHECK(ID_Paises>0),
-	  CHECK(Data_Fim>Data_Inicio),
-	  PRIMARY KEY (CC),
-	  FOREIGN KEY (CC) REFERENCES Pessoas(CC),
-	  FOREIGN KEY (ID_Paises) REFERENCES Paises(ID_Paises)
+--Inserçao de dados na tabela Formandos
+INSERT INTO Formandos(CC_Formandos, formacao, idade)
+VALUES(90097140172, 'Esteticista', 5)
+INSERT INTO Formandos(CC_Formandos, formacao, idade)
+VALUES(14412315809, 'Engenharia Informatica', 3)
+INSERT INTO Formandos(CC_Formandos, formacao, idade)
+VALUES(43894120385, 'Enfermagem', 4)
 
-)
 
---CRIACAO DA TABELA MANUAISESCOLARES
-CREATE TABLE ManuaisEscolares(
-    ISBN			BIGINT				NOT NULL,
-    Titulo          VARCHAR(50)			NOT NULL,
-    AnoEscolar      Integer				NOT NULL,
-	Edicao			Integer				NOT NULL,
-	CHECK(ISBN>0),
-	CHECK(Edicao>0),
-    CHECK(AnoEscolar>0),
-    PRIMARY KEY (ISBN),
-)
 
---CRIACAO DA TABELA ERRATAS
-CREATE TABLE Erratas(
-    ID_Erratas		Integer				NOT NULL,
-	Texto			VARCHAR(50)			NOT NULL,
-	CHECK(ID_Erratas>0),
-	PRIMARY KEY (ID_Erratas),
-)
+--Inserção de dados na tabela Formadores
+INSERT INTO Formadores(CC_Formadores, Nivel)
+VALUES(14111111149, 5)
+INSERT INTO Formadores(CC_Formadores, Nivel)
+VALUES(34850311149, 2)
+INSERT INTO Formadores(CC_Formadores, Nivel)
+VALUES(65894290193, 8)
 
---CRIACAO DA TABELA MANUAISESCOLARES_ERRATAS
-CREATE TABLE ManuaisEscolares_Erratas(
-	ISBN			BIGINT				NOT NULL,
-	ID_Erratas		Integer				NOT NULL,
-	CHECK(ISBN>0),
-	CHECK(ID_Erratas>0),
-	PRIMARY KEY (ID_Erratas),
-	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
-	FOREIGN KEY(ID_Erratas) REFERENCES Erratas,
-)
+--Inserção de dados na tabela ManuaisEscolares
+INSERT INTO ManuaisEscolares(ISBN,Titulo,AnoEscolar,Edicao)
+VALUES(0942893058025, 'As 3 Marias', 7, 2)
+INSERT INTO ManuaisEscolares(ISBN,Titulo,AnoEscolar,Edicao)
+VALUES(0942893061047, 'Alfa: Livro Portugues', 1, 5)		---
+INSERT INTO ManuaisEscolares(ISBN,Titulo,AnoEscolar,Edicao)
+VALUES(3491270634913, 'Alfa: Livro Matemática', 1, 8)		---
+INSERT INTO ManuaisEscolares(ISBN,Titulo,AnoEscolar,Edicao)
+VALUES(8947238984120, 'Alfa: Livro Estudo do Meio', 2, 3)	---
+INSERT INTO ManuaisEscolares(ISBN,Titulo,AnoEscolar,Edicao)
+VALUES(4239590252892, 'Expressões 11: Matemática A', 11, 1) --
+INSERT INTO ManuaisEscolares(ISBN,Titulo,AnoEscolar,Edicao)
+VALUES(9014809183184, 'Biologia Geologia 10', 10, 4) --
+INSERT INTO ManuaisEscolares(ISBN,Titulo,AnoEscolar,Edicao)
+VALUES(3129798457239, 'Novo 10F: Fisica & Quimica', 10, 3)
 
---CRIACAO DA TABELA CLASSIFICAR
-CREATE TABLE Classificar(
-	 ISBN BIGINT  NOT NULL,
-	 CC   BIGINT NOT NULL,
-	 ID_fabricacao  INTEGER NOT NULL,
-	 CHECK(CC>0),
-	 CHECK(ISBN>0),
-	 CHECK(ID_fabricacao>0),
-	 PRIMARY KEY (ISBN,ID_fabricacao,CC),
-	 FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares,
-	 FOREIGN KEY (CC) REFERENCES Pessoas,
-	 FOREIGN KEY (ID_fabricacao) REFERENCES tipo_fabricacao,
+--Inserção de dados na tabela Editoras
+INSERT INTO Editoras(ID_Editoras, Nome_Editoras, Cidade, Total_Vendas)
+VALUES(31, 'Porto Editora', 'Porto', 423.43) ---
+INSERT INTO Editoras(ID_Editoras, Nome_Editoras, Cidade, Total_Vendas)
+VALUES(86, 'ASA Editora', 'Porto', 1028.55) --
+INSERT INTO Editoras(ID_Editoras, Nome_Editoras, Cidade, Total_Vendas)
+VALUES(93, 'Editorial Planeta', 'Lisboa', 199.10)
+INSERT INTO Editoras(ID_Editoras, Nome_Editoras, Cidade, Total_Vendas)
+VALUES(15, 'Planeta Tangerina', 'Viseu', 735.91)
 
-) 
+--Inserção de dados na tabela Produzir
+INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidade)
+VALUES('10 May 2020', 0942893061047, 31, 19.99, 100)
+INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidade)
+VALUES('5 April 2021', 3491270634913, 31, 24.99, 120)
+INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidade)
+VALUES('19 July 2019', 8947238984120, 31, 22.99, 90)
+INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidade)
+VALUES('22 July 2022', 4239590252892, 86, 27.99, 150)
+INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidade)
+VALUES('1 August 2018', 9014809183184, 93, 29.99, 100)
+INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidade)
+VALUES('15 January 2018', 0942893058025, 15, 20.99, 20)
+INSERT INTO Produzir(Data_Producao, ISBN, ID_Editoras, Custo_Unitario, Quantidade)
+VALUES('22 March 2023', 3129798457239, 15, 29.99, 150)
 
---CRIACAO DA TABELA EDITORAS
-CREATE TABLE Editoras (
-    ID_Editoras			INT			NOT NULL,
-    Nome_Editoras		VARCHAR(255) NOT NULL,
-    Cidade				VARCHAR(255)	NOT NULL,
-    Total_Vendas		DECIMAL(10, 2),
-	CHECK(ID_Editoras>0),
-	CHECK(Total_Vendas>0),
-	PRIMARY KEY(ID_Editoras),
-)
 
---CRIACAO DA TABELA VENDER
-CREATE TABLE Vender(
-    ID_Paises            Integer            NOT NULL    IDENTITY(1,1), 
-    ID_Editoras            Integer            NOT NULL,
-    Data_Vendas					DATE not null,
-	ISBN			BIGINT NOT NULL,
-    Quantidade            Integer     NOT NULL ,
-    Preco_Unitario        FLOAT  NOT NULL,
-	CHECK(ID_Editoras>0),
-    CHECK(Preco_Unitario>0),
-	CHECK(Quantidade>0),
-    PRIMARY KEY(ID_Paises,ID_Editoras),
-    FOREIGN KEY(ID_Paises) REFERENCES Paises,
-    FOREIGN KEY(ID_Editoras) REFERENCES Editoras,
-	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
-)
+--Inserção de dados na tabela Paises
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(1, 'Espanha', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(2, 'Portugal', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(3, 'França', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(4, 'Suiça', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(5, 'Alemanha', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(6, 'Belgica', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(7, 'Brasil', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(8, 'Inglaterra', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(9, 'Finlândia', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(10, 'Suécia', 1)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(11, 'China', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(12, 'Coreia Norte', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(13, 'Russia', 0)
+INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
+VALUES(14, 'Argentina', 1)
 
---CRIACAO DA TABELA FORMANDOS
-CREATE TABLE Formandos(
-    CC_Formandos              BIGINT            NOT NULL,
-    formacao        VARCHAR(50)        NOT NULL,
-    idade            Integer            NOT NULL,
-    CHECK(idade>0),
-	CHECK(CC_Formandos>0),
-    PRIMARY KEY(CC_Formandos),
-    FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
-)
 
---CRIACAO DA TABELA FORMADORES
-CREATE TABLE Formadores (
+SET IDENTITY_INSERT Vender ON;
 
-	CC_Formadores BIGINT       NOT NULL,
-    Nivel INTEGER	NOT NULL,
-	CHECK(CC_Formadores>0),
-	CHECK(Nivel>0),
-	PRIMARY KEY(CC_Formadores) ,
-	FOREIGN KEY (CC_Formadores) REFERENCES Pessoas,
-)
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (1,31, 0942893061047, '2023-05-10', 10, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (8,31, 0942893061047, '2023-05-11', 10, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (3,31, 0942893061047, '2023-05-10', 30, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (2,31, 0942893061047, '2023-05-10', 30, 35.99) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (5,31, 0942893061047, '2023-06-25', 10, 37.99) 
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (10,86, 4239590252892, '2023-06-30', 49, 31.79) --
+INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
+VALUES (10,15, 0942893058025, '2023-08-1', 20, 33.49) --
 
---CRIACAO DA TABELA FORMACAO
-CREATE TABLE Formacao(
-    Data_formacao        DATE,
-    ISBN                BIGINT        NOT NULL,
-    CC_Formadores                   BIGINT       NOT NULL,
-	CC_Formandos		BIGINT NOT NULL,
-    preco                FLOAT        NOT NULL,
-    CHECK(preco>0),
-	
-	CHECK(ISBN>0),
-    PRIMARY KEY(ISBN, CC_Formandos,CC_Formadores, Data_formacao),
-    FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
-    FOREIGN KEY(CC_Formadores) REFERENCES Pessoas,
-	FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
-)
 
---CRIACAO DA TABELA PRODUZIR
-CREATE TABLE Produzir(
-    Data_Producao        DATE,
-    ISBN                BIGINT            NOT NULL,
-    ID_Editoras            Integer            NOT NULL,
-    Custo_Unitario        FLOAT            NOT NULL,
-    Quantidade            Integer            NOT NULL,
-    CHECK(Custo_Unitario>0),
-    CHECK(Quantidade>0),
-	CHECK(ISBN>0),
-	CHECK(ID_EDITORAS>0),
-    PRIMARY KEY (Data_Producao, ISBN, ID_Editoras),
-    FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares,
-    FOREIGN KEY (ID_Editoras) REFERENCES Editoras,
-)
+--Inserção de dados na tabela Viver
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (14111111149, 2, '4 March 2004') --
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio, Data_Fim)
+VALUES (34850311149, 10, '8 October 2004', '3 April 2015') --
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (90097140172, 2, '14 January 2004')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (14412315809, 2, '28 February 2004') --
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (65894290193, 2, '10 February 2004')
+INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
+VALUES (43894120385, 2, '25 May 2004')
+
+--Inserção de dados na tabela tipo_fabricacao
+INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao)
+VALUES(15, 'Fabricação em lote')
+INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao, Descricao)
+VALUES(2, 'Fabricação por encomenda', 'Exclusivo Clientes especiais')
+INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao)
+VALUES(10, 'Fabricação flexível')
+
+--Inserção de dados na tabela Classificar
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893061047, 43894120385, 15)
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893061047, 14412315809, 15)
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893061047, 90097140172, 15)
+INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
+VALUES(0942893058025, 65894290193, 2)
+
+--Inserção de dados na tabela Erratas
+INSERT INTO Erratas(ID_Erratas, Texto)
+VALUES(1, 'Pergunta 5 da pagina 59')
+INSERT INTO Erratas(ID_Erratas, Texto)
+VALUES(2, 'Exclusão da pergunta 10 da pagina 15')
+INSERT INTO Erratas(ID_Erratas, Texto)
+VALUES(3, 'Erros Ortográficos')
+
+--Inserção de dados na tabela ManuaisEscolares_Erratas
+INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
+VALUES(0942893061047, 1)
+INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
+VALUES(0942893061047, 2)
+INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
+VALUES(3491270634913, 3)
+
+--Inserção de dados na tabela Formacao
+INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
+VALUES('12 May 2024', 3491270634913, 14111111149, 43894120385, 100.60)
+INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
+VALUES('15 May 2024', 3491270634913, 14111111149, 43894120385, 100.60)
+INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
+VALUES('13 May 2024', 9014809183184, 65894290193, 14412315809, 100.90)
+
