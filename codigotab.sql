@@ -28,8 +28,15 @@ CREATE TABLE Pessoas(
 		FOREIGN KEY (End_CodigoPostal) REFERENCES Endereco
 		)
 
+CREATE TABLE Paises(
+	ID_Paises INTEGER NOT NULL,
+	Nome_Paises VARCHAR(50)	NOT NULL,
+	Criador BIT NOT NULL DEFAULT 0 ,
+	---- Criador pode ser: Criador('1') ou não criador('0')
+	CHECK(ID_Paises>0),
+	PRIMARY KEY (ID_Paises)
+)--CRIACAO DA TABELA TIPO_FABRICACAO
 
---CRIACAO DA TABELA TIPO_FABRICACAO
 CREATE TABLE tipo_fabricacao(
 		ID_fabricacao  INTEGER NOT NULL,
 		Nome_Fabricacao VARCHAR(50) NOT NULL,
@@ -37,17 +44,6 @@ CREATE TABLE tipo_fabricacao(
 		CHECK(ID_fabricacao>0),	--Um determinado ID é sempre maior que zero
 		PRIMARY KEY (ID_fabricacao) 
 )
-
---CRIACAO DA TABELA PAISES
-CREATE TABLE Paises(
-	ID_Paises INTEGER NOT NULL,
-	Nome_Paises VARCHAR(50)	NOT NULL,
-	Criador BIT NOT NULL DEFAULT 0 NOT NULL,
-	---- Criador pode ser: Criador('1') ou não criador('0')
-	CHECK(ID_Paises>0),
-	PRIMARY KEY (ID_Paises)
-)
-
 --CRIACAO DA TABELA VIVER
 CREATE TABLE Viver(
 	  CC BIGINT NOT NULL,
@@ -144,7 +140,7 @@ CREATE TABLE Formandos(
     idade            Integer            NOT NULL,
     CHECK(idade>0),
 	CHECK(CC_Formandos>0),
-    PRIMARY KEY(CC),
+    PRIMARY KEY(CC_Formandos),
     FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
 )
 
@@ -169,7 +165,7 @@ CREATE TABLE Formacao(
     CHECK(preco>0),
 	
 	CHECK(ISBN>0),
-    PRIMARY KEY(ISBN, CC, Data_formacao),
+    PRIMARY KEY(ISBN, CC_Formandos,CC_Formadores, Data_formacao),
     FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
     FOREIGN KEY(CC_Formadores) REFERENCES Pessoas,
 	FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
@@ -190,5 +186,3 @@ CREATE TABLE Produzir(
     FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares,
     FOREIGN KEY (ID_Editoras) REFERENCES Editoras,
 )
-
-
