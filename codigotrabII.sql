@@ -1,4 +1,4 @@
-USE TRABALHO
+USE Pessoas
 GO
 
 --Mostrar Tabelas
@@ -41,21 +41,21 @@ INSERT INTO Pessoas (CC, Nome_Pessoas, Data_Nasc, Telefone, End_CodigoPostal, En
 VALUES (43894120385, 'Lara Esteves',  '25 May 2004', 988888888,  '5000-000', 'Rua das Rosas') --FORMANDO
 
 --Inserçao de dados na tabela Formandos
-INSERT INTO Formandos(CC, formacao, idade)
+INSERT INTO Formandos(CC_Formandos, formacao, idade)
 VALUES(90097140172, 'Esteticista', 5)
-INSERT INTO Formandos(CC, formacao, idade)
+INSERT INTO Formandos(CC_Formandos, formacao, idade)
 VALUES(14412315809, 'Engenharia Informatica', 3)
-INSERT INTO Formandos(CC, formacao, idade)
+INSERT INTO Formandos(CC_Formandos, formacao, idade)
 VALUES(43894120385, 'Enfermagem', 4)
 
 
 
 --Inserção de dados na tabela Formadores
-INSERT INTO Formadores(CC, Nivel)
+INSERT INTO Formadores(CC_Formadores, Nivel)
 VALUES(14111111149, 5)
-INSERT INTO Formadores(CC, Nivel)
+INSERT INTO Formadores(CC_Formadores, Nivel)
 VALUES(34850311149, 2)
-INSERT INTO Formadores(CC, Nivel)
+INSERT INTO Formadores(CC_Formadores, Nivel)
 VALUES(65894290193, 8)
 
 --Inserção de dados na tabela ManuaisEscolares
@@ -131,7 +131,9 @@ VALUES(13, 'Russia', 0)
 INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
 VALUES(14, 'Argentina', 1)
 
---Inserção de dados na tabela Vender
+
+SET IDENTITY_INSERT Vender ON;
+
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
 VALUES (1,31, 0942893061047, '2023-05-10', 10, 35.99) --
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
@@ -149,13 +151,14 @@ VALUES (10,86, 4239590252892, '2023-06-30', 49, 31.79) --
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
 VALUES (10,15, 0942893058025, '2023-08-1', 20, 33.49) --
 
+
 --Inserção de dados na tabela Viver
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
 VALUES (14111111149, 2, '4 March 2004')
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio, Data_Fim)
 VALUES (34850311149, 10, '8 October 2004', '3 April 2015')
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
-VALUES (34850311149, 2, '4 April 2015')
+VALUES (34850311145, 2, '4 April 2015')
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
 VALUES (90097140172, 2, '14 January 2004')
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
@@ -206,7 +209,6 @@ INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('15 May 2024', 3491270634913, 14111111149, 43894120385, 100.60)
 INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('13 May 2024', 9014809183184, 65894290193, 14412315809, 100.90)
-
 
 
 
