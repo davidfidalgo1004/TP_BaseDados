@@ -145,8 +145,6 @@ VALUES (2,31, 0942893061047, '2023-05-10', 30, 35.99) --
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
 VALUES (5,31, 0942893061047, '2023-06-25', 10, 37.99) 
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
-VALUES (2,31, 3491270634913, '2023-06-20', 25, 39.99) --
-INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
 VALUES (10,86, 4239590252892, '2023-06-30', 49, 31.79) --
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
 VALUES (10,15, 0942893058025, '2023-08-1', 20, 33.49) --
@@ -154,15 +152,13 @@ VALUES (10,15, 0942893058025, '2023-08-1', 20, 33.49) --
 
 --Inserção de dados na tabela Viver
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
-VALUES (14111111149, 2, '4 March 2004')
+VALUES (14111111149, 2, '4 March 2004') --
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio, Data_Fim)
-VALUES (34850311149, 10, '8 October 2004', '3 April 2015')
-INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
-VALUES (34850311145, 2, '4 April 2015')
+VALUES (34850311149, 10, '8 October 2004', '3 April 2015') --
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
 VALUES (90097140172, 2, '14 January 2004')
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
-VALUES (14412315809, 2, '28 February 2004')
+VALUES (14412315809, 2, '28 February 2004') --
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
 VALUES (65894290193, 2, '10 February 2004')
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
@@ -209,6 +205,4 @@ INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('15 May 2024', 3491270634913, 14111111149, 43894120385, 100.60)
 INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('13 May 2024', 9014809183184, 65894290193, 14412315809, 100.90)
-
-
 
