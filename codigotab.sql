@@ -6,7 +6,6 @@ GO
 
 USE Pessoas
 GO
-drop database Pessoas
 
 CREATE TABLE Endereco(
 		End_CodigoPostal CHAR(8) NOT NULL,
