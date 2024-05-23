@@ -17,6 +17,7 @@ SELECT * FROM Editoras
 SELECT * FROM tipo_fabricacao
 SELECT * FROM Classificar
 SELECT * FROM Paises
+-----------------------------------------------EXERCICIO 1--------------------------------------------------------------------------------------------
 --Inserçao de dados na tabela endereço
 INSERT INTO Endereco (End_CodigoPostal, End_Localidade)
 VALUES ('5000-000', 'Vila Real')
@@ -103,15 +104,14 @@ VALUES('22 March 2023', 3129798457239, 15, 29.99, 150)
 
 --Inserção de dados na tabela Paises
 INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
-VALUES(1, 'Espanha', 1)
+VALUES(1, 'Espanha', 'sim')
 INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
-VALUES(2, 'Portugal', 0)
+VALUES(2, 'Portugal', 'nao')
 INSERT INTO Paises(ID_Paises, Nome_Paises, Criador)
-VALUES(3, 'França', 1)
+VALUES(3, 'França', 'sim')
 
 
 --Inserção de dados na tabela Vender
-SET IDENTITY_INSERT Vender ON;
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
 VALUES (1,31, 0942893061047, '2023-05-10', 10, 35.99) --
 INSERT INTO Vender(ID_Paises,ID_Editoras, ISBN, Data_Vendas, Quantidade, Preco_Unitario)
