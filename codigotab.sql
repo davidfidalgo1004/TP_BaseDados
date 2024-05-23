@@ -6,7 +6,7 @@ GO
 
 USE Pessoas
 GO
-
+drop database Pessoas
 
 CREATE TABLE Endereco(
 		End_CodigoPostal CHAR(8) NOT NULL,
@@ -25,14 +25,14 @@ CREATE TABLE Pessoas(
 		CHECK(CC>0),	--O numero de CC é sempre maior que zero
 		CHECK (End_codigoPostal LIKE '[0-9][0-9][0-9][0-9]-[0-9][0-9][0-9]'),
 		PRIMARY KEY (CC),
-		FOREIGN KEY (End_CodigoPostal) REFERENCES Endereco
+		FOREIGN KEY (End_CodigoPostal) REFERENCES Endereco(End_CodigoPostal)
 		)
 
 CREATE TABLE Paises(
 	ID_Paises INTEGER NOT NULL,
 	Nome_Paises VARCHAR(50)	NOT NULL,
-	Criador BIT NOT NULL DEFAULT 0 ,
-	---- Criador pode ser: Criador('1') ou não criador('0')
+	Criador		VARCHAR(3)	NOT NULL,
+	CHECK(Criador='Sim' OR Criador='SIM' or Criador='sim' or Criador='Nao' OR Criador='NAO' or Criador='nao'),
 	CHECK(ID_Paises>0),
 	PRIMARY KEY (ID_Paises)
 )--CRIACAO DA TABELA TIPO_FABRICACAO
@@ -86,8 +86,8 @@ CREATE TABLE ManuaisEscolares_Erratas(
 	CHECK(ISBN>0),
 	CHECK(ID_Erratas>0),
 	PRIMARY KEY (ID_Erratas),
-	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
-	FOREIGN KEY(ID_Erratas) REFERENCES Erratas,
+	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares(ISBN),
+	FOREIGN KEY(ID_Erratas) REFERENCES Erratas(ID_Erratas),
 )
 
 --CRIACAO DA TABELA CLASSIFICAR
@@ -98,10 +98,10 @@ CREATE TABLE Classificar(
 	 CHECK(CC>0),
 	 CHECK(ISBN>0),
 	 CHECK(ID_fabricacao>0),
-	 PRIMARY KEY (ISBN,ID_fabricacao,CC),
-	 FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares,
-	 FOREIGN KEY (CC) REFERENCES Pessoas,
-	 FOREIGN KEY (ID_fabricacao) REFERENCES tipo_fabricacao,
+	 PRIMARY KEY (ISBN,CC),
+	 FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares(ISBN),
+	 FOREIGN KEY (CC) REFERENCES Pessoas(CC),
+	 FOREIGN KEY (ID_fabricacao) REFERENCES tipo_fabricacao(ID_fabricacao),
 
 ) 
 
@@ -118,19 +118,18 @@ CREATE TABLE Editoras (
 
 --CRIACAO DA TABELA VENDER
 CREATE TABLE Vender(
-    ID_Paises            Integer            NOT NULL    IDENTITY(1,1), 
-    ID_Editoras            Integer            NOT NULL,
-    Data_Vendas					DATE not null,
-	ISBN			BIGINT NOT NULL,
-    Quantidade            Integer     NOT NULL ,
-    Preco_Unitario        FLOAT  NOT NULL,
-	CHECK(ID_Editoras>0),
-    CHECK(Preco_Unitario>0),
-	CHECK(Quantidade>0),
-    PRIMARY KEY(ID_Paises,ID_Editoras),
-    FOREIGN KEY(ID_Paises) REFERENCES Paises,
-    FOREIGN KEY(ID_Editoras) REFERENCES Editoras,
-	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
+    ID_Paises       Integer     NOT NULL, 
+    ID_Editoras     Integer     NOT NULL,
+    Data_Vendas		DATE		not null,
+	ISBN			BIGINT		NOT NULL,
+    Quantidade      Integer     NOT NULL,
+    Preco_Unitario  FLOAT		NOT NULL,
+    CHECK(Preco_Unitario>=0),
+	CHECK(Quantidade>=0),
+    PRIMARY KEY(ID_Paises, ISBN, Data_Vendas),
+    FOREIGN KEY(ID_Paises) REFERENCES Paises(ID_Paises),
+    FOREIGN KEY(ID_Editoras) REFERENCES Editoras(ID_Editoras),
+	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares(ISBN),
 )
 
 --CRIACAO DA TABELA FORMANDOS
@@ -141,7 +140,7 @@ CREATE TABLE Formandos(
     CHECK(idade>0),
 	CHECK(CC_Formandos>0),
     PRIMARY KEY(CC_Formandos),
-    FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
+    FOREIGN KEY(CC_Formandos) REFERENCES Pessoas(CC),
 )
 
 --CRIACAO DA TABELA FORMADORES
@@ -152,7 +151,7 @@ CREATE TABLE Formadores (
 	CHECK(CC_Formadores>0),
 	CHECK(Nivel>0),
 	PRIMARY KEY(CC_Formadores) ,
-	FOREIGN KEY (CC_Formadores) REFERENCES Pessoas,
+	FOREIGN KEY (CC_Formadores) REFERENCES Pessoas(CC),
 )
 
 --CRIACAO DA TABELA FORMACAO
@@ -166,9 +165,9 @@ CREATE TABLE Formacao(
 	
 	CHECK(ISBN>0),
     PRIMARY KEY(ISBN, CC_Formandos,CC_Formadores, Data_formacao),
-    FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares,
-    FOREIGN KEY(CC_Formadores) REFERENCES Pessoas,
-	FOREIGN KEY(CC_Formandos) REFERENCES Pessoas,
+    FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares(ISBN),
+    FOREIGN KEY(CC_Formadores) REFERENCES Formadores(CC_Formadores),
+	FOREIGN KEY(CC_Formandos) REFERENCES Formandos(CC_Formandos),
 )
 
 --CRIACAO DA TABELA PRODUZIR
@@ -183,6 +182,6 @@ CREATE TABLE Produzir(
 	CHECK(ISBN>0),
 	CHECK(ID_EDITORAS>0),
     PRIMARY KEY (Data_Producao, ISBN, ID_Editoras),
-    FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares,
-    FOREIGN KEY (ID_Editoras) REFERENCES Editoras,
+    FOREIGN KEY (ISBN) REFERENCES ManuaisEscolares(ISBN),
+    FOREIGN KEY (ID_Editoras) REFERENCES Editoras(ID_Editoras),
 )
