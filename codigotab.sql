@@ -7,6 +7,7 @@ GO
 USE Pessoas
 GO
 
+
 CREATE TABLE Endereco(
 		End_CodigoPostal CHAR(8) NOT NULL,
 		End_Localidade VARCHAR(50) NOT NULL,
