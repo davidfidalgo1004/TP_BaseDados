@@ -1,6 +1,7 @@
 USE Pessoas
 Go
 
+-----------------------------------EXERCICIO 3-----------------------------------------------------------------------------
 CREATE PROCEDURE formandoporformador @cc_formador BIGINT, @valortotal FLOAT OUTPUT
 AS
 	BEGIN
@@ -8,6 +9,7 @@ AS
 		DECLARE @data_ano_atras DATE
 		SET @data_hoje = GETDATE()
 		SET @data_ano_atras = DATEADD(YEAR, -1, @data_hoje)
+		SET @valortotal = 0
 		SELECT COUNT(DISTINCT ff.CC_Formandos) AS Quantidade_Alunos
 		FROM Formadores F, Formacao ff
 		WHERE f.CC_Formadores = @cc_formador AND
