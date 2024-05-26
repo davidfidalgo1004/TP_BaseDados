@@ -1,6 +1,7 @@
 Use Pessoas
 GO
 
+-----------------EXERCICIO 4--------------------------------------------------
 CREATE TRIGGER VERIFICAFORMANDO
 ON formacao
 INSTEAD OF INSERT
@@ -24,3 +25,5 @@ VALUES('15 May 2024', 3491270634913, 34850311149, 43894120385, 100.80)
 --Este faz insert
 INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('20 May 2024', 3491270634913, 34850311149, 43894120385, 100.80)
+
+select * from Formacao
