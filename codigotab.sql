@@ -85,7 +85,7 @@ CREATE TABLE ManuaisEscolares_Erratas(
 	ID_Erratas		Integer				NOT NULL,
 	CHECK(ISBN>0),
 	CHECK(ID_Erratas>0),
-	PRIMARY KEY (ID_Erratas),
+	PRIMARY KEY (ID_Erratas, ISBN),
 	FOREIGN KEY(ISBN) REFERENCES ManuaisEscolares(ISBN),
 	FOREIGN KEY(ID_Erratas) REFERENCES Erratas(ID_Erratas),
 )
