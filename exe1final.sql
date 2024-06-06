@@ -18,6 +18,7 @@ SELECT * FROM tipo_fabricacao
 SELECT * FROM Classificar
 SELECT * FROM Paises
 -----------------------------------------------EXERCICIO 1--------------------------------------------------------------------------------------------
+-- Inserir, PELO MENOS, 3 elementos em cada tabela da base de dados
 --Inserçao de dados na tabela endereço
 INSERT INTO Endereco (End_CodigoPostal, End_Localidade)
 VALUES ('5000-000', 'Vila Real')
@@ -135,6 +136,9 @@ VALUES (65894290193, 2, '10 February 2004')
 INSERT INTO Viver(CC, ID_Paises, Data_Inicio)
 VALUES (43894120385, 3, '25 May 2004')
 
+
+
+
 --Inserção de dados na tabela tipo_fabricacao
 INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao)
 VALUES(15, 'Fabricação em lote')
@@ -142,6 +146,9 @@ INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao, Descricao)
 VALUES(2, 'Fabricação por encomenda', 'Exclusivo Clientes especiais')
 INSERT INTO tipo_fabricacao(ID_fabricacao, Nome_Fabricacao)
 VALUES(10, 'Fabricação flexível')
+
+
+
 
 --Inserção de dados na tabela Classificar
 INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
@@ -159,6 +166,8 @@ VALUES(9014809183184, 65894290193, 15)
 INSERT INTO Classificar(ISBN, CC, ID_fabricacao)
 VALUES(3129798457239, 65894290193, 15)
 
+
+
 --Inserção de dados na tabela Erratas
 INSERT INTO Erratas(ID_Erratas, Texto)
 VALUES(1, 'Pergunta 5 da pagina 59')
@@ -166,6 +175,9 @@ INSERT INTO Erratas(ID_Erratas, Texto)
 VALUES(2, 'Exclusão da pergunta 10 da pagina 15')
 INSERT INTO Erratas(ID_Erratas, Texto)
 VALUES(3, 'Erros Ortográficos')
+
+
+
 
 --Inserção de dados na tabela ManuaisEscolares_Erratas
 INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
@@ -175,6 +187,7 @@ VALUES(9014809183184, 2)
 INSERT INTO ManuaisEscolares_Erratas(ISBN, ID_Erratas)
 VALUES(3491270634913, 3)
 
+
 --Inserção de dados na tabela Formacao
 INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('12 May 2024', 3491270634913, 14111111149, 43894120385, 100.60)
@@ -182,3 +195,4 @@ INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('15 May 2024', 3491270634913, 34850311149, 90097140172, 100.79)
 INSERT INTO Formacao(Data_Formacao, ISBN, CC_Formadores, CC_Formandos, preco)
 VALUES('13 May 2024', 9014809183184, 65894290193, 14412315809, 100.90)
+
