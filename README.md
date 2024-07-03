@@ -1,6 +1,9 @@
 # TP_BaseDados
-Trabalho Prático da UC de Base de Dados 2023/2024
+Universidade de Trás os Montes e Alto Douro
+Trabalho Prático de grupo da UC de Base de Dados 2023/2024 
 
-Já podem usar o codigotab.sql  e o codigotrabll.sql
-
-Está td funcional 
+Realizado por:
+-David Fidalgo
+-Leonor Pinto
+-Matilde Coelho
+-Lara Esteves
